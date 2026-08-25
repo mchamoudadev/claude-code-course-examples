@@ -1,7 +1,8 @@
 # Claude Code Course — Example Projects
 
-A suite of example projects built with [Claude Code](https://claude.ai/code) for the
-Claude Code course. Each folder is a self-contained demo of a planning, skills, agents,
+A suite of example projects built with Claude Code for the course
+[**Agentic Coding with Claude Code — Build & Ship a Real App**](https://dugsiiye.com/course/agentic-coding-with-claude-code-build-ship-a-real-app).
+Each folder is a self-contained demo of a planning, skills, agents,
 or full-app workflow.
 
 ## Projects
