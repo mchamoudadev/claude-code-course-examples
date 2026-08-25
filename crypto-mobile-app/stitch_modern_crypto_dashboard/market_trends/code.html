@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Neo Capital - Markets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+        
+        body {
+            background-color: #0A0A0B;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .shimmer-pulse {
+            animation: shimmer 2s infinite ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.8; filter: brightness(1.3); }
+            100% { opacity: 1; filter: brightness(1); }
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Tailwind Config from Style Guidance -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed": "#001a42",
+                    "inverse-surface": "#e5e2e3",
+                    "tertiary": "#4edea3",
+                    "surface-tint": "#adc6ff",
+                    "inverse-primary": "#005ac2",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e3",
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-bright": "#3a393a",
+                    "on-primary-container": "#00285d",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001f26",
+                    "on-tertiary-fixed": "#002113",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "on-tertiary-container": "#00311f",
+                    "surface-container-high": "#2a2a2b",
+                    "on-primary": "#002e6a",
+                    "surface-container": "#201f20",
+                    "on-surface-variant": "#c2c6d6",
+                    "on-surface": "#e5e2e3",
+                    "primary": "#adc6ff",
+                    "outline-variant": "#424754",
+                    "secondary-container": "#03b5d3",
+                    "secondary-fixed": "#acedff",
+                    "surface-container-lowest": "#0e0e0f",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-dim": "#131314",
+                    "surface": "#131314",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "tertiary-fixed": "#6ffbbe",
+                    "outline": "#8c909f",
+                    "surface-container-highest": "#353436",
+                    "inverse-on-surface": "#313031",
+                    "on-secondary-container": "#00424e",
+                    "background": "#131314",
+                    "tertiary-container": "#00a572",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#1c1b1c",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-variant": "#353436",
+                    "on-secondary": "#003640",
+                    "on-tertiary": "#003824",
+                    "secondary": "#4cd7f6",
+                    "error-container": "#93000a",
+                    "primary-container": "#4d8eff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "base-unit": "4px",
+                    "stack-gap": "12px",
+                    "safe-area-bottom": "34px",
+                    "grid-gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-md-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-numeric": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md-mobile": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-numeric": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- Fixed Shader Background -->
+<!-- STITCH_SHADER_START:ANIMATION_2 class="fixed inset-0 w-full h-full -z-10" -->
+<div class="fixed inset-0 w-full h-full -z-10" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Slow, fluid motion for a sophisticated look
+    float t = u_time * 0.2;
+    
+    // Create multiple layers of noise/blobs
+    float color1 = sin(uv.x * 3.0 + t) * 0.5 + 0.5;
+    float color2 = cos(uv.y * 2.0 - t * 0.8) * 0.5 + 0.5;
+    float color3 = sin((uv.x + uv.y) * 4.0 + t * 0.5) * 0.5 + 0.5;
+    
+    // Blend with the design system palette (Deep charcoal/navy to Electric Blue)
+    vec3 baseColor = vec3(0.03, 0.04, 0.05); // Very dark navy/charcoal
+    vec3 accentColor = vec3(0.02, 0.2, 0.5); // Deep electric blue glow
+    
+    float mixFactor = (color1 * color2 * color3) * 0.4;
+    vec3 finalColor = mix(baseColor, accentColor, mixFactor);
+    
+    // Add a very subtle vignette
+    float vignette = 1.0 - length(uv - 0.5) * 0.8;
+    finalColor *= vignette;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A professional high-fidelity studio portrait of a young crypto investor with clean lighting and a minimalist tech-focused background, styled in deep obsidian and electric blue tones to match a premium fintech application aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUwT2CeNN6DBDdEj6HVfL8bDcXWob82_i-iVYRFXyfmtGFWNotkfoTpU7zzvTRbEWM6JghJoi7zt5FTj4KjRs5OlvGDxQI_feXQx5pB6BNKmsI9rpawzOQ7-bfWqOrkuX6Gf5a3p_BRCHxN24UEYeh3aSyDkuNf_IOlPXkZXp01-cyZf8_oTuoXb33GmL_IysbuzWlwpyTwuIgk7xJ6TpQ7FDnmJPtRO7rc6cZQbVpb2OpbNmjFInC-A"/>
+</div>
+<span class="font-label-numeric text-label-numeric tracking-widest text-secondary dark:text-secondary uppercase">NEO_CAPITAL</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200">notifications</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-padding">
+<!-- Search & Filter Section -->
+<section class="space-y-6 mb-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-white/10 rounded-xl py-4 pl-12 pr-4 text-on-surface focus:outline-none focus:border-secondary transition-colors font-body-lg" placeholder="Search markets..." type="text"/>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+<button class="px-5 py-2 rounded-full bg-secondary text-on-secondary whitespace-nowrap font-body-sm active:scale-95 transition-transform">Top Gainers</button>
+<button class="px-5 py-2 rounded-full glass-card text-on-surface-variant whitespace-nowrap font-body-sm active:scale-95 transition-transform">Newest</button>
+<button class="px-5 py-2 rounded-full glass-card text-on-surface-variant whitespace-nowrap font-body-sm active:scale-95 transition-transform">DeFi</button>
+<button class="px-5 py-2 rounded-full glass-card text-on-surface-variant whitespace-nowrap font-body-sm active:scale-95 transition-transform">Layer 1</button>
+<button class="px-5 py-2 rounded-full glass-card text-on-surface-variant whitespace-nowrap font-body-sm active:scale-95 transition-transform">Metaverse</button>
+</div>
+</section>
+<!-- Watchlist (Bento Style) -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-primary">Watchlist</h2>
+<button class="text-secondary font-body-sm flex items-center gap-1">View all <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- BTC Card -->
+<div class="glass-card p-4 rounded-xl space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-[#F7931A]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-[#F7931A]" style="font-variation-settings: 'FILL' 1;">currency_bitcoin</span>
+</div>
+<span class="font-label-numeric text-on-surface">BTC</span>
+</div>
+<span class="text-tertiary shimmer-pulse font-label-numeric">+2.4%</span>
+</div>
+<div>
+<div class="text-on-surface-variant font-body-sm">Bitcoin</div>
+<div class="font-label-numeric text-lg">$64,281.20</div>
+</div>
+</div>
+<!-- ETH Card -->
+<div class="glass-card p-4 rounded-xl space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-[#627EEA]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-[#627EEA]" style="font-variation-settings: 'FILL' 1;">atm</span>
+</div>
+<span class="font-label-numeric text-on-surface">ETH</span>
+</div>
+<span class="text-tertiary shimmer-pulse font-label-numeric">+1.8%</span>
+</div>
+<div>
+<div class="text-on-surface-variant font-body-sm">Ethereum</div>
+<div class="font-label-numeric text-lg">$3,492.55</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Market List (Live Price Board) -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-primary">Live Markets</h2>
+<div class="flex items-center gap-2 text-outline font-label-numeric text-xs">
+<span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>
+                    LIVE DATA
+                </div>
+</div>
+<div class="space-y-1">
+<!-- Header -->
+<div class="flex justify-between px-4 py-2 text-outline font-label-numeric text-[10px] uppercase tracking-widest">
+<span class="w-1/2">Asset</span>
+<span class="w-1/4 text-right">Price</span>
+<span class="w-1/4 text-right">24h</span>
+</div>
+<!-- Assets -->
+<div class="glass-card rounded-xl overflow-hidden divide-y divide-white/5">
+<!-- SOL -->
+<div class="flex items-center justify-between p-4 active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 w-1/2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center border border-secondary/20">
+<span class="font-label-numeric text-secondary">SOL</span>
+</div>
+<div>
+<div class="font-headline-md-mobile text-sm">Solana</div>
+<div class="text-[10px] text-outline font-label-numeric">RANK #5</div>
+</div>
+</div>
+<div class="w-1/4 text-right">
+<div class="font-label-numeric">$142.20</div>
+</div>
+<div class="w-1/4 text-right">
+<span class="text-tertiary shimmer-pulse font-label-numeric">+4.12%</span>
+</div>
+</div>
+<!-- DOT -->
+<div class="flex items-center justify-between p-4 active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 w-1/2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-tertiary/20 to-tertiary/10 flex items-center justify-center border border-tertiary/20">
+<span class="font-label-numeric text-tertiary">DOT</span>
+</div>
+<div>
+<div class="font-headline-md-mobile text-sm">Polkadot</div>
+<div class="text-[10px] text-outline font-label-numeric">RANK #14</div>
+</div>
+</div>
+<div class="w-1/4 text-right">
+<div class="font-label-numeric">$7.15</div>
+</div>
+<div class="w-1/4 text-right">
+<span class="text-error shimmer-pulse font-label-numeric">-0.84%</span>
+</div>
+</div>
+<!-- LINK -->
+<div class="flex items-center justify-between p-4 active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 w-1/2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
+<span class="font-label-numeric text-primary">LINK</span>
+</div>
+<div>
+<div class="font-headline-md-mobile text-sm">Chainlink</div>
+<div class="text-[10px] text-outline font-label-numeric">RANK #16</div>
+</div>
+</div>
+<div class="w-1/4 text-right">
+<div class="font-label-numeric">$18.92</div>
+</div>
+<div class="w-1/4 text-right">
+<span class="text-tertiary shimmer-pulse font-label-numeric">+1.15%</span>
+</div>
+</div>
+<!-- MATIC -->
+<div class="flex items-center justify-between p-4 active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 w-1/2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center border border-secondary/20">
+<span class="font-label-numeric text-secondary">MATIC</span>
+</div>
+<div>
+<div class="font-headline-md-mobile text-sm">Polygon</div>
+<div class="text-[10px] text-outline font-label-numeric">RANK #21</div>
+</div>
+</div>
+<div class="w-1/4 text-right">
+<div class="font-label-numeric">$0.72</div>
+</div>
+<div class="w-1/4 text-right">
+<span class="text-error shimmer-pulse font-label-numeric">-2.31%</span>
+</div>
+</div>
+<!-- NEAR -->
+<div class="flex items-center justify-between p-4 active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4 w-1/2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-tertiary/20 to-tertiary/10 flex items-center justify-center border border-tertiary/20">
+<span class="font-label-numeric text-tertiary">NEAR</span>
+</div>
+<div>
+<div class="font-headline-md-mobile text-sm">Near Protocol</div>
+<div class="text-[10px] text-outline font-label-numeric">RANK #25</div>
+</div>
+</div>
+<div class="w-1/4 text-right">
+<div class="font-label-numeric">$5.42</div>
+</div>
+<div class="w-1/4 text-right">
+<span class="text-tertiary shimmer-pulse font-label-numeric">+8.45%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Market Insights Banner -->
+<section class="mt-8 mb-4">
+<div class="relative rounded-2xl overflow-hidden h-40">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 mix-blend-overlay z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A sophisticated abstract visualization of data streaming in a 3D digital environment, using glowing neon lines and translucent surfaces in a futuristic architectural space. The aesthetic features deep obsidian backgrounds and electric blue and teal highlights, evoking high-frequency trading and technological power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDibMdC2ph_NBI7Z78V-WF9ZZiLfMvG9c4tKEY5g_tGf05xVTJosZGkB-TP0Mjd8vkFjVHMBhuaMuoQvXoA6RT9zYUi-rzVPkkmcRWhb60Usw--fz-YhggXO7T4lPGcximOw7ka3bi5i0XYSvOUxcEKlSacOYB9391EqAG13tgs-d6LsrA_0poYqmmRuK0rWHnySVMo-Fjg2k_WgJ6TnCUJP4bkbrarGyJA1YamnzkSEpcw7bH5U-w_Zg"/>
+<div class="absolute inset-0 p-6 flex flex-col justify-end z-20">
+<div class="text-xs font-label-numeric text-secondary tracking-widest mb-1">MARKET TRENDS</div>
+<h3 class="font-headline-md-mobile text-on-surface leading-tight">Layer 2 TVL reached a new ATH today</h3>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/10 shadow-[0_-8px_24px_rgba(0,0,0,0.5)] flex justify-around items-center pt-3 pb-safe-area-bottom px-4 w-full">
+<!-- Dashboard -->
+<div class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</div>
+<!-- Portfolio -->
+<div class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm">Portfolio</span>
+</div>
+<!-- Markets (Active) -->
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-body-sm text-body-sm">Markets</span>
+</div>
+<!-- Settings -->
+<div class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for price shimmers
+        document.querySelectorAll('.shimmer-pulse').forEach(el => {
+            el.addEventListener('click', () => {
+                el.style.animation = 'none';
+                el.offsetHeight; // trigger reflow
+                el.style.animation = null;
+            });
+        });
+
+        // Subtle parallax on cards based on scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.glass-card');
+            const scrolled = window.scrollY;
+            
+            cards.forEach((card, index) => {
+                const speed = 0.02 * (index % 3 + 1);
+                card.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body></html>

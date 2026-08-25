@@ -1,0 +1,44 @@
+{
+  "project": "PostForge",
+  "updated": "2026-07-05",
+  "sourceOfTruth": true,
+  "statusLegend": ["blocked", "ready", "in-progress", "in-review", "done"],
+  "verifyLegend": {
+    "screen": "Launch the app + screenshot the real route in the browser (Claude-in-Chrome); verify visually against the design + acceptance criteria at desktop + mobile.",
+    "command": "Run documented commands/observations (build/typecheck/test, Inngest dashboard, DB/GridFS).",
+    "mixed": "Both screen and command verification."
+  },
+  "readyRule": "A task is 'ready' only when every id in dependsOn has status 'done'.",
+  "waves": {
+    "0": ["T01"],
+    "1": ["T02", "T07"],
+    "2": ["T03", "T08", "T09"],
+    "3": ["T04", "T17"],
+    "4": ["T05"],
+    "5": ["T06"],
+    "6": ["T10", "T11", "T13", "T14", "T15", "T18", "T19"],
+    "7": ["T12"],
+    "8": ["T16"]
+  },
+  "tasks": [
+    { "id": "T01", "slug": "scaffolding", "title": "Project scaffolding, Inngest wiring & env contract", "status": "done", "wave": 0, "verify": "mixed", "dependsOn": [], "blocks": ["T02", "T07"] },
+    { "id": "T02", "slug": "foundation-libs", "title": "Foundation libraries: Mongo/GridFS, data model, GPT-5 & image adapters, settings store", "status": "done", "wave": 1, "verify": "command", "dependsOn": ["T01"], "blocks": ["T03", "T04", "T05", "T06", "T14", "T17"] },
+    { "id": "T03", "slug": "agent-tools", "title": "AgentKit tools: web_search, fetch_url, generate_poster, save_post", "status": "done", "wave": 2, "verify": "command", "dependsOn": ["T02"], "blocks": ["T04", "T15", "T17"] },
+    { "id": "T04", "slug": "agents-and-router", "title": "Six agents + deterministic router network", "status": "done", "wave": 3, "verify": "command", "dependsOn": ["T02", "T03"], "blocks": ["T05", "T18"] },
+    { "id": "T05", "slug": "orchestration", "title": "Durable orchestration: generatePost, per-stage persistence, telemetry, retries & failure", "status": "done", "wave": 4, "verify": "command", "dependsOn": ["T02", "T04"], "blocks": ["T06", "T11", "T14", "T18"], "note": "Verified LIVE end-to-end (research→published in 36s, incremental persistence + telemetry + subProgress + poster). Fixed R-0016 (als.exit bypass of step.ai.infer AI-Gateway 400). §7.4 relaxed: one durable run-network step, not per-inference. MODEL: gpt-5-mini/nano fail research ('Provider returned error'); running on gemini-2.5-flash-lite (working+cheapest) pending user model call." },
+    { "id": "T06", "slug": "api-surface", "title": "API surface: generate, posts, poster streaming, stats, settings", "status": "done", "wave": 5, "verify": "command", "dependsOn": ["T02", "T05"], "blocks": ["T10", "T11", "T12", "T13", "T15", "T18", "T19"], "note": "Verified LIVE: POST /api/generate -> full generation -> done; GET poll shape; poster stream 780KB image/jpeg + ETag/304; DELETE removes post + poster (no orphan); stats/settings/posts filters. dto.ts is the locked UI contract." },
+    { "id": "T07", "slug": "design-system", "title": "Design system — import PostForge.dc.html via claude_design MCP", "status": "done", "wave": 1, "verify": "screen", "dependsOn": ["T01"], "blocks": ["T08", "T09"] },
+    { "id": "T08", "slug": "app-shell", "title": "App shell, navigation & global states", "status": "done", "wave": 2, "verify": "screen", "dependsOn": ["T07"], "blocks": ["T10", "T11", "T13", "T14", "T15"] },
+    { "id": "T09", "slug": "public-surface", "title": "Public surface — marketing landing + auth (stub)", "status": "done", "wave": 2, "verify": "screen", "dependsOn": ["T07"], "blocks": ["T16"] },
+    { "id": "T10", "slug": "new-post", "title": "New Post screen + generation trigger flow", "status": "done", "wave": 6, "verify": "screen", "dependsOn": ["T06", "T08"], "blocks": ["T16"] },
+    { "id": "T11", "slug": "pipeline-showcase", "title": "Generation-in-progress pipeline showcase (hero) + live polling", "status": "done", "wave": 6, "verify": "screen", "dependsOn": ["T05", "T06", "T08"], "blocks": ["T12", "T16"] },
+    { "id": "T12", "slug": "post-detail", "title": "Post detail (finished-article view)", "status": "done", "wave": 7, "verify": "screen", "dependsOn": ["T06", "T11"], "blocks": ["T16"] },
+    { "id": "T13", "slug": "dashboard-library", "title": "Dashboard/home + Library (browse & analytics)", "status": "done", "wave": 6, "verify": "screen", "dependsOn": ["T06", "T08"], "blocks": ["T16"] },
+    { "id": "T14", "slug": "scheduled-cron", "title": "Scheduled / cron management (screen + cron function + schedules API)", "status": "done", "wave": 6, "verify": "mixed", "dependsOn": ["T02", "T05", "T08"], "blocks": ["T16"] },
+    { "id": "T15", "slug": "settings", "title": "Settings — integration status/test-connection, defaults & danger zone", "status": "done", "wave": 6, "verify": "screen", "dependsOn": ["T03", "T06", "T08"], "blocks": ["T16"] },
+    { "id": "T16", "slug": "verification", "title": "README/dev-setup & end-to-end verification", "status": "done", "wave": 8, "verify": "mixed", "dependsOn": ["T09", "T10", "T11", "T12", "T13", "T14", "T15", "T17", "T18", "T19"], "blocks": [] }
+    { "id": "T17", "slug": "seed-data", "title": "Seed / demo data & fixtures", "status": "done", "wave": 3, "verify": "screen", "dependsOn": ["T02", "T03"], "blocks": ["T16"], "note": "Data verified via Mongo (7 posts 5/1/1, 5 GridFS posters, 2 schedules, idempotent); visual dashboard/library confirmation deferred to T13/T16." },
+    { "id": "T18", "slug": "tests", "title": "Automated test suite", "status": "done", "wave": 6, "verify": "command", "dependsOn": ["T04", "T05", "T06"], "blocks": ["T16"] },
+    { "id": "T19", "slug": "rate-limit-dedupe", "title": "Rate-limit + dedupe guard on /api/generate", "status": "done", "wave": 6, "verify": "mixed", "dependsOn": ["T06"], "blocks": ["T16"] }
+  ]
+}

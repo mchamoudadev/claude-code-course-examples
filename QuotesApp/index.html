@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quotes — a commonplace book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrap">
+
+  <header class="app">
+    <div class="brand">
+      <span class="eyebrow">The commonplace book</span>
+      <h1><span class="mark">&ldquo;</span>Quotes</h1>
+      <p>Lines worth keeping.</p>
+    </div>
+    <div class="actions">
+      <button id="btn-surprise" class="primary">Surprise me</button>
+      <button id="btn-favorites" class="ghost" aria-pressed="false">Favorites</button>
+      <button id="btn-export" class="ghost">Export</button>
+      <button id="btn-import" class="ghost">Import</button>
+      <input type="file" id="file-import" accept="application/json,.json" hidden />
+    </div>
+  </header>
+
+  <!-- Add / edit form -->
+  <details class="composer" id="composer">
+    <summary>
+      <span class="chev">▶</span>
+      <span id="composer-title">Add a quote</span>
+      <span class="hint">click to open</span>
+    </summary>
+    <form id="quote-form" novalidate>
+      <input type="hidden" id="edit-id" value="" />
+      <div class="form-grid">
+        <div class="field full">
+          <label for="text">Quote <span class="req">*</span></label>
+          <textarea id="text" placeholder="The thing actually worth remembering…"></textarea>
+        </div>
+        <div class="field">
+          <label for="author">Author</label>
+          <input type="text" id="author" placeholder="Who said it" />
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <input type="text" id="category" placeholder="Group it under…" list="category-options" autocomplete="off" />
+          <datalist id="category-options"></datalist>
+        </div>
+        <div class="field">
+          <label for="source">Source</label>
+          <input type="text" id="source" placeholder="Book, article, or URL" />
+        </div>
+        <div class="field">
+          <label for="tags">Tags</label>
+          <input type="text" id="tags" placeholder="comma, separated, themes" />
+        </div>
+        <div class="field">
+          <label for="page">Page</label>
+          <input type="number" id="page" min="0" placeholder="e.g. 42" />
+        </div>
+        <div class="field full">
+          <label for="note">Note</label>
+          <input type="text" id="note" placeholder="Why you saved it" />
+        </div>
+      </div>
+      <div class="form-foot">
+        <span class="form-error" id="form-error"></span>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="btn-cancel" hidden>Cancel</button>
+        <button type="submit" class="primary" id="btn-save">Save quote</button>
+      </div>
+    </form>
+  </details>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search">
+      <span class="ic">⌕</span>
+      <input type="text" id="search" placeholder="Search text, author, or note…" autocomplete="off" />
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <!-- Active filters -->
+  <div class="filters" id="filters"></div>
+
+  <!-- Spotlight -->
+  <div id="spotlight-host"></div>
+
+  <!-- Quote list -->
+  <div class="list" id="list"></div>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

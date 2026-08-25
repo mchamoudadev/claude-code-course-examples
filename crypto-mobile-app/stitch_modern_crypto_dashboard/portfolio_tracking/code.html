@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Neo Capital - Portfolio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed": "#001a42",
+                    "inverse-surface": "#e5e2e3",
+                    "tertiary": "#4edea3",
+                    "surface-tint": "#adc6ff",
+                    "inverse-primary": "#005ac2",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e3",
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-bright": "#3a393a",
+                    "on-primary-container": "#00285d",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001f26",
+                    "on-tertiary-fixed": "#002113",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "on-tertiary-container": "#00311f",
+                    "surface-container-high": "#2a2a2b",
+                    "on-primary": "#002e6a",
+                    "surface-container": "#201f20",
+                    "on-surface-variant": "#c2c6d6",
+                    "on-surface": "#e5e2e3",
+                    "primary": "#adc6ff",
+                    "outline-variant": "#424754",
+                    "secondary-container": "#03b5d3",
+                    "secondary-fixed": "#acedff",
+                    "surface-container-lowest": "#0e0e0f",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-dim": "#131314",
+                    "surface": "#131314",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "tertiary-fixed": "#6ffbbe",
+                    "outline": "#8c909f",
+                    "surface-container-highest": "#353436",
+                    "inverse-on-surface": "#313031",
+                    "on-secondary-container": "#00424e",
+                    "background": "#131314",
+                    "tertiary-container": "#00a572",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#1c1b1c",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-variant": "#353436",
+                    "on-secondary": "#003640",
+                    "on-tertiary": "#003824",
+                    "secondary": "#4cd7f6",
+                    "error-container": "#93000a",
+                    "primary-container": "#4d8eff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "base-unit": "4px",
+                    "stack-gap": "12px",
+                    "safe-area-bottom": "34px",
+                    "grid-gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-numeric": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-numeric": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes drawIn {
+            from { stroke-dashoffset: 1000; opacity: 0; }
+            to { stroke-dashoffset: 0; opacity: 1; }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .chart-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawIn 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .glass-card {
+            background: rgba(18, 18, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #0A0A0B;
+            overscroll-behavior: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-background">
+<!-- Background Shader -->
+<!-- STITCH_SHADER_START:ANIMATION_2 class="fixed inset-0 w-full h-full opacity-40 pointer-events-none z-0" -->
+<div class="fixed inset-0 w-full h-full opacity-40 pointer-events-none z-0" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Slow, fluid motion for a sophisticated look
+    float t = u_time * 0.2;
+    
+    // Create multiple layers of noise/blobs
+    float color1 = sin(uv.x * 3.0 + t) * 0.5 + 0.5;
+    float color2 = cos(uv.y * 2.0 - t * 0.8) * 0.5 + 0.5;
+    float color3 = sin((uv.x + uv.y) * 4.0 + t * 0.5) * 0.5 + 0.5;
+    
+    // Blend with the design system palette (Deep charcoal/navy to Electric Blue)
+    vec3 baseColor = vec3(0.03, 0.04, 0.05); // Very dark navy/charcoal
+    vec3 accentColor = vec3(0.02, 0.2, 0.5); // Deep electric blue glow
+    
+    float mixFactor = (color1 * color2 * color3) * 0.4;
+    vec3 finalColor = mix(baseColor, accentColor, mixFactor);
+    
+    // Add a very subtle vignette
+    float vignette = 1.0 - length(uv - 0.5) * 0.8;
+    finalColor *= vignette;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a tech executive in high-contrast cinematic lighting. The individual has a confident expression and is wearing a dark charcoal turtleneck. The background is a soft-focus office with electric blue neon accents. Digital painting style with sharp focus on the face and rich, deep obsidian skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUGzaoZBMDTNL8B4espyHn0IH8dYBwZspt8PJaxNEBaGnfefwPaDel2XJbXpj0OtsqNSi6lfWvpUf7kD06lDc4_AGz_UxSWt8022BUVmYYYWw3vzkmCc5HJlBn_FQNe3bunulzTHABn3Yt0kzLCf6vnN2bZyELDINozBOKm4d7nYz45sbidc94bcNgrdwxLjA7OlfrIEF_2GgEYXl8ZHquWuArkcdJxSP-t-rhZgfWuAQBg9eXON0Zjw"/>
+</div>
+<span class="font-label-numeric text-label-numeric tracking-widest text-secondary uppercase">NEO_CAPITAL</span>
+</div>
+<button class="active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<main class="relative z-10 pt-24 pb-32 px-container-padding">
+<!-- Hero Section: Performance Chart -->
+<section class="stagger-item" style="animation-delay: 0.1s;">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-body-sm text-body-sm text-outline mb-1">Total Balance</h2>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface">$142,850.42</span>
+<span class="font-label-numeric text-label-numeric text-tertiary">+12.4%</span>
+</div>
+</div>
+<div class="flex bg-surface-container-low rounded-lg p-1 border border-white/5">
+<button class="px-3 py-1 rounded text-[10px] font-bold bg-secondary text-on-secondary">ALL</button>
+<button class="px-3 py-1 rounded text-[10px] font-bold text-outline">1Y</button>
+<button class="px-3 py-1 rounded text-[10px] font-bold text-outline">1M</button>
+</div>
+</div>
+<!-- Area Chart -->
+<div class="glass-card rounded-xl p-4 h-64 relative overflow-hidden">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Fill -->
+<path d="M0 150 L0 100 C 50 110, 100 60, 150 80 S 250 20, 300 50 S 350 10, 400 30 L 400 150 Z" fill="url(#chartGradient)"></path>
+<!-- Line -->
+<path class="chart-path" d="M0 100 C 50 110, 100 60, 150 80 S 250 20, 300 50 S 350 10, 400 30" fill="none" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between">
+<span class="text-[10px] font-label-numeric text-outline uppercase">JAN 2023</span>
+<span class="text-[10px] font-label-numeric text-outline uppercase">PRESENT</span>
+</div>
+</div>
+</section>
+<!-- Performance Stats Bento -->
+<section class="grid grid-cols-2 gap-3 my-8">
+<div class="glass-card rounded-xl p-4 stagger-item" style="animation-delay: 0.2s;">
+<span class="material-symbols-outlined text-tertiary mb-2">trending_up</span>
+<h3 class="font-body-sm text-body-sm text-outline">Best Performer</h3>
+<div class="mt-1">
+<span class="font-label-numeric text-label-numeric text-on-surface">Solana</span>
+<p class="text-tertiary text-xs font-label-numeric">+48.2%</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 stagger-item" style="animation-delay: 0.3s;">
+<span class="material-symbols-outlined text-error mb-2">trending_down</span>
+<h3 class="font-body-sm text-body-sm text-outline">Worst Performer</h3>
+<div class="mt-1">
+<span class="font-label-numeric text-label-numeric text-on-surface">Chainlink</span>
+<p class="text-error text-xs font-label-numeric">-4.1%</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 col-span-2 flex items-center justify-between stagger-item" style="animation-delay: 0.4s;">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-secondary-container/20 border border-secondary/20">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+</div>
+<div>
+<h3 class="font-body-sm text-body-sm text-outline">Projected Annual Yield</h3>
+<p class="font-label-numeric text-label-numeric text-on-surface">8.42% APY</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</section>
+<!-- Asset Breakdown -->
+<section>
+<div class="flex justify-between items-center mb-4 stagger-item" style="animation-delay: 0.5s;">
+<h2 class="font-headline-md text-headline-md text-on-surface">Asset Holdings</h2>
+<button class="text-secondary text-xs font-bold tracking-wider uppercase">Filter</button>
+</div>
+<div class="space-y-3">
+<!-- Bitcoin -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between stagger-item" style="animation-delay: 0.6s;">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F7931A]/10 border border-[#F7931A]/30 flex items-center justify-center">
+<img class="w-6 h-6" data-alt="High-quality 3D render of a Bitcoin symbol made of frosted glass and gold wireframe. The lighting is cold, surgical blue, casting long shadows. It is set against a dark, minimalist digital background with subtle grid lines. The aesthetic is clean, professional, and institutional crypto." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUJP4wWbxhFlPwUubyUx1w7f9Jme2iHW9JU4BFoBcpUhic6J96aeOI7AURiCy5YtP4S3ifWtz2Lh_Ch5lqtHzxBsNgEWe-G_JUUt5PZ3bg0BfXDswUHK_BEt-NRwB91FAO1TgZ7oK9IbElJxuoBvBb_SgiWs_9QejV6OXTg0BUY2JfJQ9h_V00l5zbLivD3aC2pSf9_PV-tT_AuN5nSCkqJVsnw55YZ4ybPl4oSMdAL2yFS0XwEmRyTA"/>
+</div>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface">Bitcoin</p>
+<p class="font-label-numeric text-xs text-outline">1.248 BTC</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$52,431.10</p>
+<p class="font-label-numeric text-xs text-tertiary">+$1,420</p>
+</div>
+</div>
+<!-- Ethereum -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between stagger-item" style="animation-delay: 0.7s;">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#627EEA]/10 border border-[#627EEA]/30 flex items-center justify-center">
+<img class="w-6 h-6" data-alt="Futuristic 3D visualization of the Ethereum logo as a crystalline octahedron glowing with deep sapphire and violet light. The asset is suspended in a dark, atmospheric vacuum with micro-particulates of light floating around it. High-fidelity glassmorphism style, elegant and technological." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf7zPMdhrE0tLjcLhm6gxwZffAUB6SpBDXmugg3dx_BURVDwWlLmLqP3AJqvWMB52F6X0kR2otUM4f8INQ1CoIlJEN-qZC8ao9JKfjrQ_dTFpCKODYXFoh5DftL_MNsWYcSN0VKhkC1H_MZId46GmqILDVnj9iVbxjSm5h6H9IP1PcvFCBgYJoUfY0AFus38dgqX7ELPhrUyyq-TfUWAp6UmXbJTgtqwGIxrkOrgJtgpQTUz45n3NVcQ"/>
+</div>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface">Ethereum</p>
+<p class="font-label-numeric text-xs text-outline">14.50 ETH</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$34,812.90</p>
+<p class="font-label-numeric text-xs text-tertiary">+$842</p>
+</div>
+</div>
+<!-- Polkadot -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between stagger-item" style="animation-delay: 0.8s;">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#E6007A]/10 border border-[#E6007A]/30 flex items-center justify-center">
+<img class="w-6 h-6" data-alt="Macro photography of a stylized digital coin with the Polkadot emblem etched in glowing pink neon. The coin has a brushed titanium texture. Set against a dark, multi-layered background with a deep depth of field. Professional lighting with vibrant pink and deep obsidian tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWYuyyScwyOfDI5fqAa48qOWsHDIDcL6Fm535yKsSF7-bMGDk6kGUYUCs7mDS_Z5dzeVGfD3q9ZMx-XRztLOEp702XeZ7FYa5dyk-dPv_sxZX-M5xXm0Si-VT4FAx0XStOdzRHOxeHfcBMKJ9I5uS1jVG2gsGWAci6-G_hk3qfu_ShsNKZSW47PcPKL_IGwVZFQIQGo1DtNRLQG1H7zsRNN6T_S28xJ79sZTN6Yyvay0fB3qwmO_mYPw"/>
+</div>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface">Polkadot</p>
+<p class="font-label-numeric text-xs text-outline">420.00 DOT</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$2,940.00</p>
+<p class="font-label-numeric text-xs text-outline">-$12</p>
+</div>
+</div>
+<!-- Chainlink -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between stagger-item" style="animation-delay: 0.9s;">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#2A5ADA]/10 border border-[#2A5ADA]/30 flex items-center justify-center">
+<img class="w-6 h-6" data-alt="Digital asset icon for Chainlink, depicted as a set of interconnected crystalline nodes glowing with electric blue energy. The style is modern minimalist, emphasizing precision and secure connections. Set in a dark void with soft radial blue gradients. Professional institutional crypto aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEpJEsCF9XITQaVwOwRPr61Wy2AVDbb_-KUMra3pUkbW_-SkhUYBvD23ipqQC4OOQBS2ID3UhWAs4RmcHoV2wOiQprEJBsxpjJ6jFoFBfkrSVUx0Mk9MWLCu2Hx-IR134Jqdeu7sQnd5GiIM7zre3XKZLk3I1Wz9CJ2bRn7Q2r3COYQRyNmPSIIjqQWTL27g7YkaWXVNmKK_AbvI-Yw6m3uQnCDdBwgucpgenheWYq9pkn1AbeA6cZNg"/>
+</div>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface">Chainlink</p>
+<p class="font-label-numeric text-xs text-outline">85.00 LINK</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$1,147.50</p>
+<p class="font-label-numeric text-xs text-error">-$45</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/10 flex justify-around items-center pt-3 pb-safe-area-bottom px-4 shadow-[0_-8px_24px_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm mt-1">Portfolio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-body-sm text-body-sm mt-1">Markets</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for list items
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.97)';
+                card.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Trigger animations sequentially
+        window.addEventListener('load', () => {
+            // Path animation handled by CSS
+            // Stagger items handled by CSS animation-delay
+        });
+    </script>
+</body></html>

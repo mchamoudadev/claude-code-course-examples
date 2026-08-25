@@ -1,0 +1,28 @@
+# Secrets / env — never bake into an image
+.env
+.env.*
+!.env.example
+
+# Dependencies (reinstalled in the image)
+node_modules
+
+# Build output / caches
+.next
+out
+coverage
+*.tsbuildinfo
+
+# Version control
+.git
+.gitignore
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build-control / orchestration — not needed at runtime
+tasks
+
+# OS cruft
+.DS_Store

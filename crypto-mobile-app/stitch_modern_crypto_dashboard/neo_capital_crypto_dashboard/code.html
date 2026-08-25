@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>NEO_CAPITAL | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style Guidance & Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed": "#001a42",
+                    "inverse-surface": "#e5e2e3",
+                    "tertiary": "#4edea3",
+                    "surface-tint": "#adc6ff",
+                    "inverse-primary": "#005ac2",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e3",
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-bright": "#3a393a",
+                    "on-primary-container": "#00285d",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001f26",
+                    "on-tertiary-fixed": "#002113",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "on-tertiary-container": "#00311f",
+                    "surface-container-high": "#2a2a2b",
+                    "on-primary": "#002e6a",
+                    "surface-container": "#201f20",
+                    "on-surface-variant": "#c2c6d6",
+                    "on-surface": "#e5e2e3",
+                    "primary": "#adc6ff",
+                    "outline-variant": "#424754",
+                    "secondary-container": "#03b5d3",
+                    "secondary-fixed": "#acedff",
+                    "surface-container-lowest": "#0e0e0f",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-dim": "#131314",
+                    "surface": "#131314",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "tertiary-fixed": "#6ffbbe",
+                    "outline": "#8c909f",
+                    "surface-container-highest": "#353436",
+                    "inverse-on-surface": "#313031",
+                    "on-secondary-container": "#00424e",
+                    "background": "#131314",
+                    "tertiary-container": "#00a572",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#1c1b1c",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-variant": "#353436",
+                    "on-secondary": "#003640",
+                    "on-tertiary": "#003824",
+                    "secondary": "#4cd7f6",
+                    "error-container": "#93000a",
+                    "primary-container": "#4d8eff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "base-unit": "4px",
+                    "stack-gap": "12px",
+                    "safe-area-bottom": "34px",
+                    "grid-gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-numeric": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-numeric": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes slideUp {
+            from { transform: translateY(24px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            opacity: 0;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .glass-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .sparkline-emerald {
+            filter: drop-shadow(0 0 4px rgba(78, 222, 163, 0.3));
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-sm selection:bg-primary/30 min-h-screen">
+<!-- Fixed Shader Background -->
+<!-- STITCH_SHADER_START:ANIMATION_2 class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40" -->
+<div class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Slow, fluid motion for a sophisticated look
+    float t = u_time * 0.2;
+    
+    // Create multiple layers of noise/blobs
+    float color1 = sin(uv.x * 3.0 + t) * 0.5 + 0.5;
+    float color2 = cos(uv.y * 2.0 - t * 0.8) * 0.5 + 0.5;
+    float color3 = sin((uv.x + uv.y) * 4.0 + t * 0.5) * 0.5 + 0.5;
+    
+    // Blend with the design system palette (Deep charcoal/navy to Electric Blue)
+    vec3 baseColor = vec3(0.03, 0.04, 0.05); // Very dark navy/charcoal
+    vec3 accentColor = vec3(0.02, 0.2, 0.5); // Deep electric blue glow
+    
+    float mixFactor = (color1 * color2 * color3) * 0.4;
+    vec3 finalColor = mix(baseColor, accentColor, mixFactor);
+    
+    // Add a very subtle vignette
+    float vignette = 1.0 - length(uv - 0.5) * 0.8;
+    finalColor *= vignette;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<!-- Top AppBar (from JSON) -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding py-4 w-full">
+<div class="flex items-center gap-3 active:scale-95 transition-transform duration-200 cursor-pointer">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-detail close-up portrait of a sophisticated tech investor with neutral, professional lighting. The aesthetic is clean and modern, featuring soft bokeh in a dark, tech-infused environment. The color palette emphasizes deep obsidian and subtle electric blue highlights, matching a premium crypto application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNvCixAKImFg41vhSuZA4lomWXGeLoP93w8T3hBVE3Et6arW2U6hTqUAuEtIicPzzBNYtrGlc7gawyacaS33_u7Ue4Kg5F2UViO1nPLGPjz5fBGSw0j_JzVmro-4OeIjQUD0KredB3hrP8aIe4fuPFD4eU5FX8U-Ci2TTlefkmsQFIRxMrNqcTTqEo_1l7sGozHwNzHOjkDlGxKN7yKHP3_mnrM4s_6bTUJZ3jXyGOx7HNcCfVsOrP_g"/>
+</div>
+<span class="font-label-numeric text-label-numeric tracking-widest text-secondary">NEO_CAPITAL</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="relative z-10 pt-24 pb-32 px-container-padding space-y-8 max-w-lg mx-auto">
+<!-- Total Balance Section -->
+<section class="animate-slide-up delay-1 text-center py-4">
+<p class="text-outline uppercase tracking-[0.2em] font-label-numeric text-[10px] mb-2">Total Estimated Balance</p>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2 tracking-tight">$142,500.00</h1>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20">
+<span class="material-symbols-outlined text-[14px] text-tertiary">trending_up</span>
+<span class="font-label-numeric text-tertiary text-xs">+4.2% <span class="text-tertiary/60 ml-1">24h</span></span>
+</div>
+</section>
+<!-- Quick Actions Grid -->
+<section class="animate-slide-up delay-2 grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2 group">
+<button class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary shadow-[0_0_20px_rgba(76,215,246,0.3)] active:scale-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+<span class="text-[11px] font-medium text-outline-variant group-hover:text-secondary transition-colors">Buy</span>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<button class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-primary active:scale-90 transition-all border-white/20">
+<span class="material-symbols-outlined">payments</span>
+</button>
+<span class="text-[11px] font-medium text-outline-variant group-hover:text-primary transition-colors">Sell</span>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<button class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-primary active:scale-90 transition-all border-white/20">
+<span class="material-symbols-outlined">swap_horiz</span>
+</button>
+<span class="text-[11px] font-medium text-outline-variant group-hover:text-primary transition-colors">Swap</span>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<button class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-primary active:scale-90 transition-all border-white/20">
+<span class="material-symbols-outlined">south_west</span>
+</button>
+<span class="text-[11px] font-medium text-outline-variant group-hover:text-primary transition-colors">Receive</span>
+</div>
+</section>
+<!-- Asset Carousel -->
+<section class="animate-slide-up delay-3 overflow-visible">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Your Assets</h3>
+<button class="text-secondary text-xs font-medium hover:underline">View All</button>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-container-padding px-container-padding">
+<!-- BTC Card -->
+<div class="min-w-[280px] glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-secondary/40 transition-colors">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#F7931A]/20 flex items-center justify-center border border-[#F7931A]/30">
+<span class="material-symbols-outlined text-[#F7931A]">currency_bitcoin</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Bitcoin</h4>
+<p class="text-xs text-outline">BTC</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$64,210.50</p>
+<p class="text-[10px] text-tertiary">+1.2%</p>
+</div>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline uppercase mb-1">Balance</p>
+<p class="font-label-numeric text-lg text-on-surface">1.245 BTC</p>
+</div>
+<div class="w-24 h-10 overflow-hidden">
+<!-- SVG Mini Sparkline -->
+<svg class="w-full h-full sparkline-emerald" viewbox="0 0 100 40">
+<path d="M0 35 Q10 32, 20 30 T40 25 T60 32 T80 15 T100 5" fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- ETH Card -->
+<div class="min-w-[280px] glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-primary/40 transition-colors">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#627EEA]/20 flex items-center justify-center border border-[#627EEA]/30">
+<span class="material-symbols-outlined text-[#627EEA]">atm</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Ethereum</h4>
+<p class="text-xs text-outline">ETH</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">$3,450.22</p>
+<p class="text-[10px] text-error">-0.4%</p>
+</div>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline uppercase mb-1">Balance</p>
+<p class="font-label-numeric text-lg text-on-surface">12.80 ETH</p>
+</div>
+<div class="w-24 h-10 overflow-hidden">
+<svg class="w-full h-full opacity-60" viewbox="0 0 100 40">
+<path d="M0 5 Q20 15, 40 10 T70 30 T100 35" fill="none" stroke="#ffb4ab" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity Section -->
+<section class="animate-slide-up delay-4">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Recent Activity</h3>
+<div class="space-y-3">
+<!-- Transaction Item -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between group active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">call_received</span>
+</div>
+<div>
+<p class="font-medium text-on-surface">Received BTC</p>
+<p class="text-xs text-outline">Mar 12, 10:45 AM • Completed</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">+0.045 BTC</p>
+<p class="text-[10px] text-tertiary">+$2,889.45</p>
+</div>
+</div>
+<!-- Transaction Item -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between group active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">swap_calls</span>
+</div>
+<div>
+<p class="font-medium text-on-surface">Swapped ETH for SOL</p>
+<p class="text-xs text-outline">Mar 11, 04:22 PM • Completed</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">-1.20 ETH</p>
+<p class="text-[10px] text-outline">$4,140.26</p>
+</div>
+</div>
+<!-- Transaction Item -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between group active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-error">
+<span class="material-symbols-outlined">call_made</span>
+</div>
+<div>
+<p class="font-medium text-on-surface">Sent SOL</p>
+<p class="text-xs text-outline">Mar 10, 09:12 AM • Completed</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-numeric text-on-surface">-45.0 SOL</p>
+<p class="text-[10px] text-outline">$6,390.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (from JSON) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/10 shadow-[0_-8px_24px_rgba(0,0,0,0.5)] flex justify-around items-center pt-3 pb-safe-area-bottom px-4 w-full">
+<!-- Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-sm text-body-sm mt-1">Dashboard</span>
+</button>
+<!-- Portfolio -->
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm mt-1">Portfolio</span>
+</button>
+<!-- Markets -->
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-body-sm text-body-sm mt-1">Markets</span>
+</button>
+<!-- Settings -->
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Mock haptic feel
+                window.navigator.vibrate && window.navigator.vibrate(5);
+            });
+        });
+
+        // Entrance animation orchestration
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.animate-slide-up');
+            cards.forEach((card, i) => {
+                card.style.opacity = '1';
+            });
+        });
+    </script>
+</body></html>

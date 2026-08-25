@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Neo Capital - Profile &amp; Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(18, 18, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .toggle-switch {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(76, 215, 246, 0.3);
+        }
+        body {
+            background-color: #0A0A0B;
+            overscroll-behavior: none;
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-surface": "#e5e2e3",
+                        "tertiary": "#4edea3",
+                        "surface-tint": "#adc6ff",
+                        "inverse-primary": "#005ac2",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e3",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-bright": "#3a393a",
+                        "on-primary-container": "#00285d",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f26",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "on-tertiary-container": "#00311f",
+                        "surface-container-high": "#2a2a2b",
+                        "on-primary": "#002e6a",
+                        "surface-container": "#201f20",
+                        "on-surface-variant": "#c2c6d6",
+                        "on-surface": "#e5e2e3",
+                        "primary": "#adc6ff",
+                        "outline-variant": "#424754",
+                        "secondary-container": "#03b5d3",
+                        "secondary-fixed": "#acedff",
+                        "surface-container-lowest": "#0e0e0f",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-dim": "#131314",
+                        "surface": "#131314",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "tertiary-fixed": "#6ffbbe",
+                        "outline": "#8c909f",
+                        "surface-container-highest": "#353436",
+                        "inverse-on-surface": "#313031",
+                        "on-secondary-container": "#00424e",
+                        "background": "#131314",
+                        "tertiary-container": "#00a572",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#1c1b1c",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#353436",
+                        "on-secondary": "#003640",
+                        "on-tertiary": "#003824",
+                        "secondary": "#4cd7f6",
+                        "error-container": "#93000a",
+                        "primary-container": "#4d8eff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "20px",
+                        "base-unit": "4px",
+                        "stack-gap": "12px",
+                        "safe-area-bottom": "34px",
+                        "grid-gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-numeric": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md-mobile": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-numeric": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-sm selection:bg-secondary/30">
+<!-- Background Shader -->
+<div class="fixed inset-0 z-0">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-40" -->
+<div class="absolute inset-0 w-full h-full opacity-40" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Slow, fluid motion for a sophisticated look
+    float t = u_time * 0.2;
+    
+    // Create multiple layers of noise/blobs
+    float color1 = sin(uv.x * 3.0 + t) * 0.5 + 0.5;
+    float color2 = cos(uv.y * 2.0 - t * 0.8) * 0.5 + 0.5;
+    float color3 = sin((uv.x + uv.y) * 4.0 + t * 0.5) * 0.5 + 0.5;
+    
+    // Blend with the design system palette (Deep charcoal/navy to Electric Blue)
+    vec3 baseColor = vec3(0.03, 0.04, 0.05); // Very dark navy/charcoal
+    vec3 accentColor = vec3(0.02, 0.2, 0.5); // Deep electric blue glow
+    
+    float mixFactor = (color1 * color2 * color3) * 0.4;
+    vec3 finalColor = mix(baseColor, accentColor, mixFactor);
+    
+    // Add a very subtle vignette
+    float vignette = 1.0 - length(uv - 0.5) * 0.8;
+    finalColor *= vignette;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+</div>
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-secondary/20 active:scale-95 transition-transform duration-200">
+<img class="w-full h-full object-cover" data-alt="A professional high-end studio portrait of a sophisticated investor with neutral expressions, lit by cool cyan and deep obsidian rim lighting to match a neo-financial crypto app aesthetic. The image is crisp, detailed, and uses a cinematic shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs0xELTNLPtgLkBVphSgSANhnzPKy-v5-Vvq3wWk7Io3CPPtBr5sgJNUTEIJwsjGkZ1Js0NStwrbzcNI5NtwgyyG_cf6zUCr7gZZe_bQ19Jn06b-sypyjE1fF8lJy30h3EMijqqTJdM9hIlv8UDRy6cxj-NlWTd_I_4wZrupRYMFdJp4_wFs0e7Nompt-Nsr9wURkXpUK9as1UkIt5c8RAMp_0UV-14skkq_02YyCIYGNVu9-yztj6-w"/>
+</div>
+<span class="font-label-numeric text-label-numeric tracking-widest text-secondary uppercase">NEO_CAPITAL</span>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200">notifications</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 pt-24 pb-32 px-container-padding max-w-md mx-auto space-y-6">
+<!-- Profile Header Section -->
+<section class="text-center space-y-4">
+<div class="relative inline-block">
+<div class="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-secondary via-primary to-tertiary">
+<div class="w-full h-full rounded-full overflow-hidden border-2 border-background">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a young tech-forward professional wearing minimalist clothing, set against a dark, tech-inspired background with subtle digital particle effects. The lighting is dominated by electric blue and deep shadows, emphasizing a premium fintech brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqPAS4rzhjnkDR9rbMLiGB0GaKCE8zjGgoIZb2AIsEK95yev_URHBl_S89453-ijypj1md5r7d44Sx4WOejXAZ8bnK1ag5rDvxbxW8o-floJPlIs9Tr7Atq1Tyof9PdJ7EMFlmek6LVRDyZ_HHpFLgqcnJPCPKF8hYdHQWLII30YlhERvtbT15dVVUp1roL75KK42ttcyLehavDobAr1qkhd1oq1dar1c3UBLq45OOIK-zr2tGo677_g"/>
+</div>
+</div>
+<div class="absolute -bottom-1 right-0 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase shadow-lg shadow-secondary/20">
+                    PRO
+                </div>
+</div>
+<div>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Alex Chen</h1>
+<p class="text-outline font-label-numeric text-[12px] uppercase tracking-wider mt-1">Tier 4 • Institutional Access</p>
+</div>
+</section>
+<!-- Security Section (Bento Style) -->
+<section class="space-y-3">
+<h2 class="text-[11px] font-bold text-outline uppercase tracking-[0.2em] px-1">Security &amp; Access</h2>
+<div class="glass-card rounded-xl overflow-hidden divide-y divide-white/5">
+<!-- Face ID -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">face</span>
+<span class="font-medium">Face ID Recognition</span>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-container-highest relative toggle-switch active:scale-90" data-active="true" onclick="toggleSwitch(this)">
+<div class="absolute top-1 left-7 w-4 h-4 rounded-full bg-secondary shadow-sm transition-all duration-300 transform translate-x-0 toggle-knob"></div>
+</button>
+</div>
+<!-- 2FA -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<span class="font-medium">Two-Factor Auth</span>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-container-highest relative toggle-switch active:scale-90" data-active="false" onclick="toggleSwitch(this)">
+<div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-outline transition-all duration-300 transform translate-x-0 toggle-knob"></div>
+</button>
+</div>
+<!-- Biometric -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">fingerprint</span>
+<span class="font-medium">Biometric Lock</span>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-container-highest relative toggle-switch active:scale-90" data-active="true" onclick="toggleSwitch(this)">
+<div class="absolute top-1 left-7 w-4 h-4 rounded-full bg-secondary shadow-sm transition-all duration-300 transform translate-x-0 toggle-knob"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Preferences Section -->
+<section class="space-y-3">
+<h2 class="text-[11px] font-bold text-outline uppercase tracking-[0.2em] px-1">Global Preferences</h2>
+<div class="glass-card rounded-xl overflow-hidden divide-y divide-white/5">
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">payments</span>
+<span class="font-medium">Primary Currency</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline font-label-numeric">USD</span>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">contrast</span>
+<span class="font-medium">Theme</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline font-label-numeric">Sync with System</span>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">language</span>
+<span class="font-medium">Language</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline font-label-numeric">English (US)</span>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Support Section -->
+<section class="space-y-3">
+<h2 class="text-[11px] font-bold text-outline uppercase tracking-[0.2em] px-1">Support &amp; Legal</h2>
+<div class="glass-card rounded-xl overflow-hidden divide-y divide-white/5">
+<a class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-tertiary transition-colors">help</span>
+<span class="font-medium">Help Center</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">open_in_new</span>
+</a>
+<a class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-tertiary transition-colors">gavel</span>
+<span class="font-medium">Terms of Service</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-error transition-colors">logout</span>
+<span class="font-medium text-error/80">Log Out</span>
+</div>
+</a>
+</div>
+</section>
+<!-- Version Info -->
+<div class="text-center py-4">
+<p class="text-[10px] text-outline/40 font-label-numeric tracking-widest uppercase">Neo Capital v2.4.0 (Build 4920)</p>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/10 flex justify-around items-center pt-3 pb-safe-area-bottom px-4 shadow-[0_-8px_24px_rgba(0,0,0,0.5)]">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm mt-1">Dashboard</span>
+</a>
+<!-- Portfolio -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm mt-1">Portfolio</span>
+</a>
+<!-- Markets -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-body-sm text-body-sm mt-1">Markets</span>
+</a>
+<!-- Settings (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full font-body-sm text-body-sm hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        function toggleSwitch(btn) {
+            const isActive = btn.getAttribute('data-active') === 'true';
+            const knob = btn.querySelector('.toggle-knob');
+            
+            if (isActive) {
+                btn.setAttribute('data-active', 'false');
+                btn.classList.replace('bg-surface-container-highest', 'bg-surface-container-highest'); // Neutral base
+                knob.classList.remove('translate-x-6', 'left-7', 'bg-secondary', 'shadow-sm');
+                knob.classList.add('left-1', 'bg-outline');
+                knob.style.transform = 'translateX(0)';
+            } else {
+                btn.setAttribute('data-active', 'true');
+                knob.classList.remove('left-1', 'bg-outline');
+                knob.classList.add('left-7', 'bg-secondary', 'shadow-sm');
+                knob.style.transform = 'translateX(0)';
+            }
+        }
+
+        // Initialize switch states on load
+        document.querySelectorAll('.toggle-switch').forEach(btn => {
+            const isActive = btn.getAttribute('data-active') === 'true';
+            const knob = btn.querySelector('.toggle-knob');
+            if (isActive) {
+                knob.classList.add('left-7', 'bg-secondary', 'shadow-sm');
+            } else {
+                knob.classList.add('left-1', 'bg-outline');
+            }
+        });
+    </script>
+</body></html>

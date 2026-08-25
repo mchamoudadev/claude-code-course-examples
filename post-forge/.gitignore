@@ -1,0 +1,33 @@
+# --- Secrets / env (ignore all .env* EXCEPT the tracked template) ---
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# --- Node / Next.js ---
+node_modules
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+*.pem
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# temp orchestrator live-trigger (not part of the app)
+scripts/_trigger.ts

@@ -1,0 +1,81 @@
+name: CI / Deploy
+
+# Test on every push and PR; deploy to the VPS only when main passes CI.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Never let two deploys run at once (and cancel superseded PR-CI runs).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # ── Gate: lint + typecheck + tests + production build ──────────────────────
+  ci:
+    name: Lint · Typecheck · Test · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install (clean, from lockfile)
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test -- run
+
+      - name: Build
+        run: npm run build
+
+  # ── Deploy: only on a push to main, and only if CI passed ──────────────────
+  deploy:
+    name: Deploy to VPS
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH to the server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Pull, build, and restart on the server
+        run: |
+          ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" '
+              set -e
+              cd ~/post-forge
+              echo "── fetching latest main ──"
+              git fetch --depth=1 origin main
+              git reset --hard origin/main
+              echo "── installing deps ──"
+              npm ci --no-audit --no-fund
+              echo "── building ──"
+              npm run build
+              echo "── restarting service ──"
+              sudo systemctl restart postforge
+              sleep 3
+              systemctl is-active postforge
+            '
+
+      - name: Smoke-test the deployed app
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "http://${{ secrets.VPS_HOST }}/sign-in")
+          echo "GET /sign-in -> HTTP $code"
+          test "$code" = "200"
